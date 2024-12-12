@@ -87,6 +87,7 @@ commit_subject = "chore(release): {version}"
 commit_message = "chore(release): {version}"
 tag_format = "v{version}"
 no_local_version = true
+branch = "dev"
 
 [project.urls]
 "Homepage" = "https://github.com/TEAMCompas/COMPAS"
