@@ -18,6 +18,8 @@ Thumbs.db
 *.so
 *.pyc
 
+compas_python_utils/_version.py
+
 # Others
 .ipynb_checkpoints/
 __pycache__/

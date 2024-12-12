@@ -1,0 +1,136 @@
+[build-system]
+requires = [
+    "setuptools>=64",
+    "setuptools-scm>=8.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "compas_python_utils"  # PyPI name
+dynamic = ["version"]
+requires-python = ">=3.8"
+description = "COMPAS Python Utilities"
+readme = "README.md"
+authors = [
+    {name = "COMPAS Team", email = "compas-dev@googlegroups.com"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "numpy>=1.16",
+    "h5py",
+    "argparse",
+    "stroopwafel",
+    "pytest>=3.6",
+    "pre-commit",
+    "flake8",
+    "black==22.10.0",
+    "isort",
+    "matplotlib>=3.3.2",
+    "pandas",
+    "astropy>=4.0",
+    "scipy>=1.5.0",
+    "latex",
+    "PyYAML",
+    "tqdm",
+    "corner"
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx>=7.0.1",
+    "numpydoc",
+    "nbsphinx",
+    "sphinx_rtd_theme>=1.2.2",
+    "sphinx-tabs",
+    "sphinx-argparse",
+    "sphinx-math-dollar>=1.2",
+    "sphinxcontrib.bibtex",
+    "linuxdoc",
+    "ipython",
+    "readthedocs-sphinx-search>=0.1.1b",
+    "sphinx-togglebutton",
+    "linuxdoc>=20210324"
+]
+dev = [
+    "pytest-cov",
+    "pre-commit",
+    "flake8",
+    "black==22.10.0",
+    "isort",
+    "coverage-badge",
+    "deepdiff",
+    "jupytext",
+    "jupyter-autotime",
+    "memory_profiler",
+    "nbconvert",
+    "ipykernel"
+]
+gpu = ["cupy"]
+
+[tool.setuptools_scm]
+version_file = "compas_python_utils/_version.py"  # Adjust path as necessary
+
+[tool.semantic_release]
+version_variable = "compas_python_utils/_version.py:__version__"
+version_source = "commit"
+commit_version_number = true
+commit_subject = "chore(release): {version}"
+commit_message = "chore(release): {version}"
+tag_format = "v{version}"
+no_local_version = true
+
+[project.urls]
+"Homepage" = "https://github.com/TEAMCompas/COMPAS"
+"Bug Reports" = "https://github.com/TEAMCompas/COMPAS/issues"
+"Source" = "https://github.com/TEAMCompas/COMPAS"
+
+[project.scripts]
+h5view = "compas_python_utils.h5view:main"
+h5copy = "compas_python_utils.h5copy:main"
+h5sample = "compas_python_utils.h5sample:main"
+plot_detailed_evolution = "compas_python_utils.detailed_evolution_plotter.plot_detailed_evolution:main"
+run_submit = "compas_python_utils.preprocessing.runSubmit:main"
+sample_stroopwafel = "compas_python_utils.preprocessing.stroopwafelInterface:main"
+sample_moe_di_stefano = "compas_python_utils.preprocessing.sampleMoeDiStefano:main"
+fast_cosmic_integrator = "compas_python_utils.cosmic_integration.FastCosmicIntegration:main"
+
+[tool.setuptools]
+packages = ["compas_python_utils"]
+
+[tool.setuptools.package-data]
+"compas_python_utils.preprocessing" = ["*.txt", "*.yaml"]
+"compas_python_utils.detailed_evolution_plotter" = ["van_den_heuvel_figures/*"]
+"compas_python_utils.cosmic_integration" = ["SNR_Grid*"]
+
+[tool.black]
+line-length = 79
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
